@@ -5,15 +5,18 @@ import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatCardModule } from "@angular/material/card";
-import { TodoItemComponent } from './components/todo-item/todo-item.component';
+import { MatListModule } from "@angular/material/list";
+import { TodoItemComponent } from "./components/todo-item/todo-item.component";
+import { TodoListComponent } from './components/todo-list/todo-list.component';
 
 @NgModule({
-  declarations: [AppComponent, TodoItemComponent],
+  declarations: [AppComponent, TodoItemComponent, TodoListComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatCardModule
+    MatCardModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

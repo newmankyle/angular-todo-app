@@ -4,5 +4,11 @@
 
 <mat-card class="container">
   <mat-card-title>Todo App</mat-card-title>
-  Simple card
+  <mat-card-content>
+    <mat-selection-list>
+      <mat-list-option *ngFor="let todo of todoList">
+        {{ todo }}
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-card-content>
 </mat-card>
