@@ -1,14 +1,18 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { TodoService } from "src/app/services/todo.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "todo-list",
   templateUrl: "./todo-list.component.html",
   styleUrls: ["./todo-list.component.css"]
 })
-export class TodoListComponent {
-  constructor() {}
+export class TodoListComponent implements OnInit {
+  public todos: Observable<string[]>;
 
-  get todoList(): any {
-    return ["this", "that", "those"];
+  constructor(private todoService: TodoService) {}
+
+  ngOnInit() {
+    this.todos = this.todoService.todos;
   }
 }
