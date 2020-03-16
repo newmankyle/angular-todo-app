@@ -7,8 +7,4 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
   title = "todo-app";
-
-  get todoList(): any {
-    return ["this", "that", "those"];
-  }
 }
