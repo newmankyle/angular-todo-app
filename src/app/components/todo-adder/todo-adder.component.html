@@ -1,0 +1,9 @@
+<mat-form-field class="todo-input-full-width" appearance="outline">
+  <input
+    matInput
+    placeholder="Add to your list..."
+    type="text"
+    [(ngModel)]="name"
+    (keyup.enter)="saveTodo()"
+  />
+</mat-form-field>
