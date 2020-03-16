@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatCardModule } from "@angular/material/card";
 import { MatListModule } from "@angular/material/list";
+import { MatInputModule } from "@angular/material/input";
 import { TodoItemComponent } from "./components/todo-item/todo-item.component";
 import { TodoListComponent } from "./components/todo-list/todo-list.component";
 import { TodoListModule } from "./components/todo-list/todo-list.module";
@@ -18,6 +19,7 @@ import { TodoListModule } from "./components/todo-list/todo-list.module";
     MatToolbarModule,
     MatCardModule,
     MatListModule,
+    MatInputModule,
     TodoListModule
   ],
   providers: [],

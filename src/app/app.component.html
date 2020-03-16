@@ -4,5 +4,10 @@
 
 <mat-card class="container">
   <mat-card-title>Todo App</mat-card-title>
-  <mat-card-content> <todo-list></todo-list> </mat-card-content>
+  <mat-card-content class="todo-input">
+    <mat-form-field class="todo-input-full-width" appearance="outline">
+      <input matInput placeholder="Add to your list..." />
+    </mat-form-field>
+    <todo-list></todo-list>
+  </mat-card-content>
 </mat-card>
