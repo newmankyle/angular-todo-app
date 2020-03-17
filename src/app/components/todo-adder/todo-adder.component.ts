@@ -18,7 +18,7 @@ export class TodoAdderComponent implements OnInit {
     if (this.name === undefined || this.name === "") {
       return;
     }
-    this.todoService.saveTodo(this.name);
+    this.todoService.saveTodo({ message: this.name, completed: false });
     this.name = "";
   }
 }

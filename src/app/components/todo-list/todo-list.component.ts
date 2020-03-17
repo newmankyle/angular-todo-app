@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { TodoService } from "src/app/services/todo.service";
+import { TodoService, Todo } from "src/app/services/todo.service";
 import { Observable } from "rxjs";
 
 @Component({
@@ -8,11 +8,15 @@ import { Observable } from "rxjs";
   styleUrls: ["./todo-list.component.css"]
 })
 export class TodoListComponent implements OnInit {
-  public todos: Observable<string[]>;
+  public todos: Observable<Todo[]>;
 
   constructor(private todoService: TodoService) {}
 
   ngOnInit() {
     this.todos = this.todoService.todos;
+  }
+
+  updateTodo(todo: Todo, _: Event) {
+    this.todoService.toggleTodo(todo);
   }
 }

@@ -5,6 +5,15 @@
 <mat-card class="container">
   <mat-card-title>Todo App</mat-card-title>
   <mat-card-content class="todo-input">
+    <button
+      mat-icon-button
+      color="accent"
+      matTooltip="Clear all completed Todos"
+      matTooltipPosition="right"
+      (click)="clearCompletedTodos()"
+    >
+      <mat-icon>clear_all</mat-icon>
+    </button>
     <todo-adder></todo-adder>
     <todo-list></todo-list>
   </mat-card-content>
