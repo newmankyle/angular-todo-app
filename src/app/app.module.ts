@@ -4,6 +4,7 @@ import { NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
+import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatCardModule } from "@angular/material/card";
 import { MatListModule } from "@angular/material/list";
@@ -27,6 +28,7 @@ import { TodoAdderComponent } from "./components/todo-adder/todo-adder.component
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    FlexLayoutModule,
     MatToolbarModule,
     MatCardModule,
     MatListModule,
