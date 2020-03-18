@@ -38,3 +38,7 @@ button.button-list-add {
   padding-top: 8px;
   padding-bottom: 8px;
 }
+
+mat-card-title.todo-title {
+  margin-bottom: 0;
+}

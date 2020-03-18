@@ -27,6 +27,16 @@ export class TodoService {
     return this._todos[id].asObservable();
   }
 
+  saveName(id: number, name: string) {
+    if (name === undefined || id === undefined) return;
+    if (this._todos[id] === undefined) {
+      this._todos[id] = new BehaviorSubject<TodoList>(this.emptyTodo);
+    }
+    this.ensureTodoList(id);
+    this.dataStore.todos[id].name = name;
+    this._todos[id].next(this.dataStore.todos[id]);
+  }
+
   saveTodo(id: number, todo: Todo) {
     this.listById(id).push(todo);
     const { todos: newTodos } = this.dataStore;
@@ -50,11 +60,15 @@ export class TodoService {
   }
 
   private listById(id: number) {
+    this.ensureTodoList(id);
+    return this.dataStore.todos[id].todoList;
+  }
+
+  private ensureTodoList(id: number) {
     const todos = this.dataStore.todos[id];
     if (todos === undefined) {
       this.dataStore.todos[id] = this.emptyTodo;
     }
-    return this.dataStore.todos[id].todoList;
   }
 
   private get emptyTodo() {

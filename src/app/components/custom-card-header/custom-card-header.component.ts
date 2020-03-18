@@ -1,11 +1,22 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { TodoService } from "src/app/services/todo.service";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import {
+  RenameTodoList,
+  RenameTodoListData
+} from "../rename-todo-list/rename-todo-list";
 
 @Component({
   selector: "custom-card-header",
   template: `
     <div flexLayout="row" fxLayoutAlign="space-between">
-      <mat-card-title>{{ name }}</mat-card-title>
+      <mat-card-title fxFlexAlign="center">{{
+        name || "placeholder"
+      }}</mat-card-title>
+      <button mat-icon-button (click)="openDialog()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <div fxFlex="grow"></div>
       <button
         mat-icon-button
         color="accent"
@@ -17,7 +28,7 @@ import { TodoService } from "src/app/services/todo.service";
       </button>
     </div>
   `,
-  styleUrls: ["./custom-card-header.component.css"]
+  styles: [".mat-card-title { text-overflow: ellipsis; white-space: nowrap;}"]
 })
 export class CustomCardHeaderComponent implements OnInit {
   @Input()
@@ -25,9 +36,23 @@ export class CustomCardHeaderComponent implements OnInit {
 
   name: string;
 
-  constructor(private todoService: TodoService) {}
+  constructor(private dialog: MatDialog, private todoService: TodoService) {}
   ngOnInit(): void {
     this.todoService.getTodos(this.id).subscribe(t => (this.name = t.name));
+  }
+
+  public openDialog() {
+    const dialogRef: MatDialogRef<
+      RenameTodoList,
+      RenameTodoListData
+    > = this.dialog.open(RenameTodoList, {
+      width: "250px",
+      data: { name: this.name }
+    });
+
+    dialogRef.afterClosed().subscribe(({ name }) => {
+      this.todoService.saveName(this.id, name);
+    });
   }
 
   public clearCompletedTodos() {
