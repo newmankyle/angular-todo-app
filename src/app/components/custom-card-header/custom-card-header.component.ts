@@ -1,11 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { TodoService } from "src/app/services/todo.service";
 
 @Component({
   selector: "custom-card-header",
   template: `
     <div flexLayout="row" fxLayoutAlign="space-between">
-      <mat-card-title>Todo App</mat-card-title>
+      <mat-card-title>{{ name }}</mat-card-title>
       <button
         mat-icon-button
         color="accent"
@@ -19,10 +19,18 @@ import { TodoService } from "src/app/services/todo.service";
   `,
   styleUrls: ["./custom-card-header.component.css"]
 })
-export class CustomCardHeaderComponent {
+export class CustomCardHeaderComponent implements OnInit {
+  @Input()
+  id: number;
+
+  name: string;
+
   constructor(private todoService: TodoService) {}
+  ngOnInit(): void {
+    this.todoService.getTodos(this.id).subscribe(t => (this.name = t.name));
+  }
 
   public clearCompletedTodos() {
-    this.todoService.clearCompletedTodos();
+    this.todoService.clearCompletedTodos(this.id);
   }
 }
