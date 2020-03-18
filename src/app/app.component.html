@@ -3,7 +3,16 @@
 </mat-toolbar>
 
 <mat-drawer-container>
-  <mat-drawer mode="side" opened><div>something</div></mat-drawer>
+  <mat-drawer mode="side" opened>
+    <div>
+      <button mat-raised-button class="button-list-add">
+        <span flexLayout="row" fxLayoutGap="8px" fxLayoutAlign="space-between">
+          <mat-icon color="primary">add</mat-icon>
+          <span class="mat-body-2">Add List</span>
+        </span>
+      </button>
+    </div>
+  </mat-drawer>
   <mat-drawer-content>
     <mat-card class="container">
       <custom-card-header></custom-card-header>
