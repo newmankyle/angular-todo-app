@@ -4,7 +4,16 @@ import { Observable } from "rxjs";
 
 @Component({
   selector: "todo-list",
-  templateUrl: "./todo-list.component.html",
+  template: `
+    <mat-selection-list>
+      <todo-item
+        *ngFor="let todo of todos | async"
+        todo="{{ todo.message }}"
+        (changed)="updateTodo(todo, $event)"
+      >
+      </todo-item>
+    </mat-selection-list>
+  `,
   styleUrls: ["./todo-list.component.css"]
 })
 export class TodoListComponent implements OnInit {
