@@ -1,8 +1,13 @@
 @import "~normalize.css";
 /* You can add global styles to this file, and also import other style files */
 
-.mat-toolbar + * {
+.mat-drawer-content > *,
+.mat-drawer-inner-container > * {
   margin-top: 1.5em;
+}
+
+.mat-drawer-container {
+  height: calc(100vh - 64px); /* subtract toolbar height */
 }
 
 html,
@@ -20,16 +25,6 @@ body {
   margin-right: auto;
 }
 
-.mat-form-field-infix,
-.mat-pseudo-checkbox,
-.mat-list-text {
-  margin-top: 0;
-}
-
 .todo-input {
-  width: 100%;
-}
-
-.todo-input-full-width {
   width: 100%;
 }
