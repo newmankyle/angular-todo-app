@@ -16,13 +16,15 @@ import { TodoItemComponent } from "./components/todo-item/todo-item.component";
 import { TodoListComponent } from "./components/todo-list/todo-list.component";
 import { TodoListModule } from "./components/todo-list/todo-list.module";
 import { TodoAdderComponent } from "./components/todo-adder/todo-adder.component";
+import { CustomCardHeaderComponent } from './components/custom-card-header/custom-card-header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoItemComponent,
     TodoListComponent,
-    TodoAdderComponent
+    TodoAdderComponent,
+    CustomCardHeaderComponent
   ],
   imports: [
     BrowserModule,

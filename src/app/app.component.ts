@@ -9,9 +9,5 @@ import { TodoService } from "./services/todo.service";
 export class AppComponent {
   title = "todo-app";
 
-  constructor(private todoService: TodoService) {}
-
-  public clearCompletedTodos() {
-    this.todoService.clearCompletedTodos();
-  }
+  constructor() {}
 }
