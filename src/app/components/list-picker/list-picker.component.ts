@@ -1,7 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, PipeTransform, Pipe } from "@angular/core";
 import { TodoListService, TodoList } from "src/app/services/todo-list.service";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
 
 @Component({
   selector: "list-picker",
@@ -11,6 +10,9 @@ import { map } from "rxjs/operators";
         mat-list-item
         *ngFor="let list of todoLists | async"
         (click)="selectTodoList(list.id)"
+        matTooltip="{{ list.name }}"
+        [matTooltipShowDelay]="500"
+        [matTooltipDisabled]="list.name | determineLength"
       >
         {{ list.name || "unnamed" }}
       </button>

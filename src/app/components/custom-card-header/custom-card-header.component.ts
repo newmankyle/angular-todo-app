@@ -52,7 +52,9 @@ export class CustomCardHeaderComponent implements OnInit {
       data: { name: this.todoList.name }
     });
 
-    dialogRef.afterClosed().subscribe(({ name }) => {
+    dialogRef.afterClosed().subscribe(data => {
+      if (data === undefined || !data.name) return;
+      const { name } = data;
       this.todoListService.saveName(this.todoList.id, name);
     });
   }

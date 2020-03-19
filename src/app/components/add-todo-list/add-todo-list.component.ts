@@ -33,7 +33,9 @@ export class AddTodoListComponent {
       data: { name: "" }
     });
 
-    dialogRef.afterClosed().subscribe(({ name }) => {
+    dialogRef.afterClosed().subscribe(data => {
+      if (data === undefined || !data.name) return;
+      const { name } = data;
       const id: number = this.todoListService.saveNewName(name);
       this.todoListService.selectTodoList(id);
     });

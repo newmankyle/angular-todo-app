@@ -15,6 +15,10 @@
   height: calc(100vh - 64px); /* subtract toolbar height */
 }
 
+.mat-drawer {
+  max-width: 30%;
+}
+
 html,
 body {
   height: 100%;
