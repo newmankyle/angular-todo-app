@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { TodoService } from "src/app/services/todo.service";
 
 @Component({
@@ -19,9 +19,6 @@ import { TodoService } from "src/app/services/todo.service";
 export class TodoAdderComponent implements OnInit {
   public name = "";
 
-  @Input()
-  id: number;
-
   constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {}
@@ -30,7 +27,7 @@ export class TodoAdderComponent implements OnInit {
     if (this.name === undefined || this.name === "") {
       return;
     }
-    this.todoService.saveTodo(this.id, {
+    this.todoService.saveTodo({
       message: this.name,
       completed: false
     });

@@ -1,14 +1,13 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnInit } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
+import { TodoListService } from "./todo-list.service";
 
 export interface Todo {
   message: string;
   completed: boolean;
 }
 
-export type TodoList = { name: string; todoList: Todo[] };
-
-export type TodoListById = Record<number, TodoList>;
+export type TodoListById = Record<number, Todo[]>;
 
 export type TodoListType = { todos: TodoListById };
 
@@ -16,62 +15,47 @@ export type TodoListType = { todos: TodoListById };
   providedIn: "root"
 })
 export class TodoService {
-  private _todos: Record<number, BehaviorSubject<TodoList>> = {};
+  private _todos: BehaviorSubject<Todo[]> = new BehaviorSubject<Todo[]>([]);
   private dataStore: TodoListType = { todos: {} };
-  constructor() {}
-
-  getTodos(id: number): Observable<TodoList> {
-    if (this._todos[id] === undefined) {
-      this._todos[id] = new BehaviorSubject<TodoList>(this.emptyTodo);
-    }
-    return this._todos[id].asObservable();
+  private id: number;
+  constructor(private todoListService: TodoListService) {
+    this.todoListService.getTodoList().subscribe(l => {
+      this.id = l.id;
+      this.ensureTodoList();
+    });
   }
 
-  saveName(id: number, name: string) {
-    if (name === undefined || id === undefined) return;
-    if (this._todos[id] === undefined) {
-      this._todos[id] = new BehaviorSubject<TodoList>(this.emptyTodo);
-    }
-    this.ensureTodoList(id);
-    this.dataStore.todos[id].name = name;
-    this._todos[id].next(this.dataStore.todos[id]);
+  getTodos(): Observable<Todo[]> {
+    return this._todos.asObservable();
   }
 
-  saveTodo(id: number, todo: Todo) {
-    this.listById(id).push(todo);
-    const { todos: newTodos } = this.dataStore;
-    this._todos[id].next(newTodos[id]);
+  saveTodo(todo: Todo) {
+    this.listById().push(todo);
+    this._todos.next(this.listById());
   }
 
-  toggleTodo(id: number, todo: Todo) {
-    for (const item of this.listById(id)) {
+  toggleTodo(todo: Todo) {
+    for (const item of this.listById()) {
       if (item.message === todo.message) {
         item.completed = !item.completed;
       }
     }
-    this._todos[id].next(this.dataStore.todos[id]);
+    this._todos.next(this.listById());
   }
 
-  clearCompletedTodos(id: number) {
-    this.dataStore.todos[id].todoList = this.listById(id).filter(
-      t => !t.completed
-    );
-    this._todos[id].next(this.dataStore.todos[id]);
+  clearCompletedTodos() {
+    this.dataStore.todos[this.id] = this.listById().filter(t => !t.completed);
+    this._todos.next(this.listById());
   }
 
-  private listById(id: number) {
-    this.ensureTodoList(id);
-    return this.dataStore.todos[id].todoList;
+  private listById(): Todo[] {
+    return this.dataStore.todos[this.id];
   }
 
-  private ensureTodoList(id: number) {
-    const todos = this.dataStore.todos[id];
+  private ensureTodoList() {
+    const todos = this.dataStore.todos[this.id];
     if (todos === undefined) {
-      this.dataStore.todos[id] = this.emptyTodo;
+      this.dataStore.todos[this.id] = [];
     }
-  }
-
-  private get emptyTodo() {
-    return { name: "", todoList: [] };
   }
 }
