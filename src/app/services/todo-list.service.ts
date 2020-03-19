@@ -53,4 +53,14 @@ export class TodoListService {
   selectTodoList(id: number) {
     this._todoLists.next(this.dataStore.todoLists[id]);
   }
+
+  saveNewName(name: string): number {
+    let result = 0;
+    const keySet: Set<string> = new Set(Object.keys(this.dataStore.todoLists));
+    while (keySet.has(result.toString())) result++;
+
+    this.dataStore.todoLists[result] = { id: result, name };
+    this._allTodoLists.next(Object.values(this.dataStore.todoLists));
+    return result;
+  }
 }

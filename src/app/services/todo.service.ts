@@ -22,6 +22,7 @@ export class TodoService {
     this.todoListService.getTodoList().subscribe(l => {
       this.id = l.id;
       this.ensureTodoList();
+      this._todos.next(this.listById());
     });
   }
 
