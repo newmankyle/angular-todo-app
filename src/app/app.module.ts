@@ -21,6 +21,7 @@ import { TodoAdderComponent } from "./components/todo-adder/todo-adder.component
 import { CustomCardHeaderComponent } from "./components/custom-card-header/custom-card-header.component";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { RenameTodoList } from "./components/rename-todo-list/rename-todo-list";
+import { ListPickerComponent } from './components/list-picker/list-picker.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RenameTodoList } from "./components/rename-todo-list/rename-todo-list";
     TodoListComponent,
     TodoAdderComponent,
     RenameTodoList,
-    CustomCardHeaderComponent
+    CustomCardHeaderComponent,
+    ListPickerComponent
   ],
   imports: [
     BrowserModule,
