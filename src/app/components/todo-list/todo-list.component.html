@@ -1,8 +1,0 @@
-<mat-selection-list>
-  <todo-item
-    *ngFor="let todo of todos | async"
-    todo="{{ todo.message }}"
-    (changed)="updateTodo(todo, $event)"
-  >
-  </todo-item>
-</mat-selection-list>

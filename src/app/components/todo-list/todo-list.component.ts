@@ -4,7 +4,16 @@ import { Observable } from "rxjs";
 
 @Component({
   selector: "todo-list",
-  templateUrl: "./todo-list.component.html",
+  template: `
+    <mat-selection-list>
+      <todo-item
+        *ngFor="let todo of todos | async"
+        todo="{{ todo.message }}"
+        (changed)="updateTodo(todo, $event)"
+      >
+      </todo-item>
+    </mat-selection-list>
+  `,
   styleUrls: ["./todo-list.component.css"]
 })
 export class TodoListComponent implements OnInit {
@@ -13,7 +22,7 @@ export class TodoListComponent implements OnInit {
   constructor(private todoService: TodoService) {}
 
   ngOnInit() {
-    this.todos = this.todoService.todos;
+    this.todos = this.todoService.getTodos();
   }
 
   updateTodo(todo: Todo, _: Event) {

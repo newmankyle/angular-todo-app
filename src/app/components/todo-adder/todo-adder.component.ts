@@ -1,10 +1,19 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl } from "@angular/forms";
 import { TodoService } from "src/app/services/todo.service";
 
 @Component({
   selector: "todo-adder",
-  templateUrl: "./todo-adder.component.html",
+  template: `
+    <mat-form-field class="todo-input" appearance="outline">
+      <input
+        matInput
+        placeholder="Add to your list..."
+        type="text"
+        [(ngModel)]="name"
+        (keyup.enter)="saveTodo()"
+      />
+    </mat-form-field>
+  `,
   styleUrls: ["./todo-adder.component.css"]
 })
 export class TodoAdderComponent implements OnInit {
@@ -18,7 +27,10 @@ export class TodoAdderComponent implements OnInit {
     if (this.name === undefined || this.name === "") {
       return;
     }
-    this.todoService.saveTodo({ message: this.name, completed: false });
+    this.todoService.saveTodo({
+      message: this.name,
+      completed: false
+    });
     this.name = "";
   }
 }

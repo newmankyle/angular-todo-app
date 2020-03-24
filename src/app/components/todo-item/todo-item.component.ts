@@ -3,7 +3,11 @@ import { EventEmitter } from "@angular/core";
 
 @Component({
   selector: "todo-item",
-  templateUrl: "./todo-item.component.html",
+  template: `
+    <mat-list-option (click)="handleChanged($event)">{{
+      todo
+    }}</mat-list-option>
+  `,
   styleUrls: ["./todo-item.component.css"]
 })
 export class TodoItemComponent {

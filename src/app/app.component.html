@@ -2,10 +2,20 @@
   <span>ToDo App</span>
 </mat-toolbar>
 
-<mat-card class="container">
-  <custom-card-header></custom-card-header>
-  <mat-card-content class="todo-input">
-    <todo-adder></todo-adder>
-    <todo-list></todo-list>
-  </mat-card-content>
-</mat-card>
+<mat-drawer-container>
+  <mat-drawer mode="side" opened>
+    <div>
+      <add-todo-list></add-todo-list>
+      <list-picker></list-picker>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-card class="container">
+      <custom-card-header></custom-card-header>
+      <mat-card-content class="todo-input">
+        <todo-adder></todo-adder>
+        <todo-list></todo-list>
+      </mat-card-content>
+    </mat-card>
+  </mat-drawer-content>
+</mat-drawer-container>
